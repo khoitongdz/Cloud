@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('https://mega.com.vn/media/news/2406_hinh-nen-may-tinh-blue-dep126.jpg'); 
+            background-image: url('https://mega.com.vn/media/news/2406_hinh-nen-may-tinh-blue-dep126.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -33,15 +33,6 @@
             padding: 5px 10px;
             border-radius: 5px;
         }
-        .container {
-            width: 320px;
-            background: linear-gradient(to bottom, #007BFF, #0056b3);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            position: relative;
-        }
         .device-text {
             font-size: 18px;
             color: white;
@@ -49,14 +40,21 @@
             font-weight: bold;
         }
         .play-button {
-            background-color: #0056b3; 
-            color: white;
-            padding: 10px 20px;
+            background-color: #0056b3;
             border: none;
             border-radius: 10px;
             font-size: 16px;
             cursor: pointer;
             margin-top: 10px;
+            padding: 10px 20px;
+            display: block;
+            text-align: center;
+        }
+        .play-button span {
+            background: linear-gradient(to right, white, #66ccff); 
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
         }
         .play-button:hover {
             background-color: #004099;
@@ -66,9 +64,9 @@
 <body>
     <div class="creator-text">code:khoitongdz</div>
     
-    <div class="container">
-        <div class="device-text">Thiết Bị 1</div>
-        <button class="play-button" onclick="window.location.href='https://webproxy.proxyshare.com/sencure/uP66qZDlSDUi64hyrb7IO'">Play</button>
-    </div>
+    <div class="device-text">Thiết Bị 1</div>
+    <button class="play-button" onclick="window.location.href='https://webproxy.proxyshare.com/sencure/uP66qZDlSDUi64hyrb7IO'">
+        <span>Play</span>
+    </button>
 </body>
 </html>
