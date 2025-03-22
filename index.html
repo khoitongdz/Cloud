@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📱 cloud phone</title>
+    <title>Custom Web</title>
     <style>
         * {
             margin: 0;
@@ -17,57 +17,65 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('https://mega.com.vn/media/news/2406_hinh-nen-may-tinh-blue-dep126.jpg');
+            background-image: url('https://mega.com.vn/media/news/2406_hinh-nen-may-tinh-blue-dep126.jpg'); 
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+        }
+        .container {
+            width: 320px;
+            background: transparent;
+            padding: 20px;
+            text-align: center;
             position: relative;
         }
-        .creator-text {
+        .web-credit {
             position: absolute;
             top: 10px;
             left: 10px;
+            color: white;
             font-size: 14px;
-            color: white;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-        .device-text {
-            font-size: 18px;
-            color: white;
-            margin-bottom: 10px;
             font-weight: bold;
         }
         .play-button {
-            background-color: #0056b3;
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
             border: none;
-            border-radius: 10px;
             font-size: 16px;
             cursor: pointer;
-            margin-top: 10px;
-            padding: 10px 20px;
-            display: block;
-            text-align: center;
-            color: white;
-        }
-        .play-button span {
-            background: linear-gradient(to right, white, #66ccff); 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         .play-button:hover {
-            background-color: #004099;
+            color: lightblue;
+        }
+        .play-icon {
+            width: 40px;
+            height: 40px;
         }
     </style>
 </head>
 <body>
-    <div class="creator-text">code:khoitongdz</div>
-    
-    <div class="device-text">Device no need VPN</div>
-    <button class="play-button" onclick="window.open('https://webproxy.proxyshare.com/sencure/dFcrZbyjeou0s8kmllavw', '_blank')">
-        <span>Play</span>
-    </button>
+    <div class="web-credit">coder:khoitong</div>
+    <div class="container">
+        <button class="play-button" onclick="openDevice1()">
+            <img src="https://cdn.now.gg/apps-content/10417/icon/chasers.png" alt="Device 1" class="play-icon">
+            Thiết Bị 1
+        </button>
+        <button class="play-button" onclick="openDevice2()">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252F10512%252Ficon%252Fthe-walking-dead-survivors.png%26w%3D256%26q%3D80&w=1440&q=70" alt="Device 2" class="play-icon">
+            Thiết Bị 2
+        </button>
+    </div>
+    <script>
+        function openDevice1() {
+            window.location.href = 'https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUFxIdDhcIHlRKS09KTFQYExoIHgkIVRMPFhc=';
+        }
+        function openDevice2() {
+            window.location.href = 'https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUHBoXGgMCVgsXGgJWDx4YExUUFxQcAlYXEhYSDx4fVEpLTkpJVA8THlYMGhcQEhUcVh8eGh9WCA4JDRINFAkIVRMPFhc=';
+        }
+    </script>
 </body>
 </html>
