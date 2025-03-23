@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📲ugphonemodbykhoitongdz</title>
+    <title>📲ugphone Mod By Khoitongdz</title>
     <style>
         * {
             margin: 0;
@@ -17,71 +17,105 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('https://mega.com.vn/media/news/2406_hinh-nen-may-tinh-blue-dep126.jpg');
+            background-image: url('https://mega.com.vn/media/news/2406_hinh-nen-may-tinh-blue-dep126.jpg'); 
             background-size: cover;
             background-position: center;
+            overflow-x: hidden;
         }
         .container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-        }
-        .web-credit {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .device {
-            display: flex;
-            align-items: center;
             gap: 20px;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            transform: scale(1.2);
+            overflow-x: auto;
+            white-space: nowrap; 
+            scroll-behavior: smooth;
+            max-width: 90vw; 
         }
-        .device img {
+
+        /* Tuỳ chỉnh thanh cuộn */
+        .container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .container::-webkit-scrollbar-track {
+            background: #222;
+            border-radius: 10px;
+        }
+        .container::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 10px;
+        }
+        .container::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+        .game-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 150px; 
+        }
+        .game-image {
             width: 80px;
             height: 80px;
-            border-radius: 5px;
+            border-radius: 10px;
         }
         .play-button {
             background-color: blue;
             color: white;
-            padding: 15px 22px;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
         }
         .play-button:hover {
             background-color: darkblue;
         }
+        .game-title {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <div class="web-credit">code:khoitongdz</div>
+    <div class="web-credit">Code:Khoitongdz</div>
     <div class="container">
-        <div class="device">
-            <img src="https://cdn.now.gg/apps-content/10417/icon/chasers.png" alt="Thiết Bị 1">
-            <button class="play-button" onclick="openDevice1()">Play</button>
+        <!-- Thiết bị 1 -->
+        <div class="game-box">
+            <div class="game-title">Thiết bị 1</div>
+            <img src="https://play-lh.googleusercontent.com/3EEJLviqFWAuHJWpmILUotvTfaFtV34KaEDoZrYAhGziOGVaHNbRZ1z7xwG-VdcdxQs" alt="Thiết bị 1" class="game-image">
+            <button class="play-button" onclick="window.location.href='https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUFxIdDhcIHlRKS09KTFQYExoIHgkIVRMPFhc='">Play</button>
         </div>
-        <div class="device">
-            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252F10512%252Ficon%252Fthe-walking-dead-survivors.png%26w%3D256%26q%3D80&w=1440&q=70" alt="Thiết Bị 2">
-            <button class="play-button" onclick="openDevice2()">Play</button>
+        <!-- Thiết bị 2 -->
+        <div class="game-box">
+            <div class="game-title">Thiết bị 2</div>
+            <img src="https://play-lh.googleusercontent.com/3EEJLviqFWAuHJWpmILUotvTfaFtV34KaEDoZrYAhGziOGVaHNbRZ1z7xwG-VdcdxQs" alt="Thiết bị 2" class="game-image">
+            <button class="play-button" onclick="window.location.href='https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUHBoXGgMCVgsXGgJWDx4YExUUFxQcAlYXEhYSDx4fVEpLTkpJVA8THlYMGhcQEhUcVh8eGh9WCA4JDRINFAkIVRMPFhc='">Play</button>
+        </div>
+        <!-- Thiết bị 3 -->
+        <div class="game-box">
+            <div class="game-title">Thiết bị 3 (cần VPN)</div>
+            <img src="https://play-lh.googleusercontent.com/3EEJLviqFWAuHJWpmILUotvTfaFtV34KaEDoZrYAhGziOGVaHNbRZ1z7xwG-VdcdxQs" alt="Thiết bị 3" class="game-image">
+            <button class="play-button" onclick="window.location.href='https://now.gg/apps/discord-inc-/1430/discord-talk-chat-hang-out.html'">Play</button>
+        </div>
+        <!-- Server VIP -->
+        <div class="game-box">
+            <div class="game-title">Server VIP Free</div>
+            <img src="https://media.discordapp.net/attachments/1337658822327668776/1353265509386420225/cc334f1d-9283-4826-b6f5-97fd228edd50_1.webp?ex=67e10637&is=67dfb4b7&hm=780e25f9355ffcd9c7dcc741350ef03420bb12c2bf380dc200bd44b96a836849&=&format=webp&width=583&height=583" alt="Server VIP Free" class="game-image">
+            <button class="play-button" onclick="window.location.href='https://www.roblox.com/es/games/2753915549/Blox-Fruits?privateServerLinkCode=78227368949942947685664999114478'">Play</button>
+        </div>
+        <!-- Link Script -->
+        <div class="game-box">
+            <div class="game-title">Script blox fruit</div>
+            <img src="https://media.discordapp.net/attachments/1251722181734563925/1353274517195198494/DALLE_2025-03-23_14.49.35_-_A_bold_gaming-style_text_logo_that_says_Script_Blox_Fruit_Free._The_text_should_have_a_strong_powerful_font_with_a_red_and_black_color_scheme._The.webp?ex=67e10e9b&is=67dfbd1b&hm=5a149215fc00fc673367273f1795b6c8484c802a844701e4cae80143315df5d8&=&format=webp&width=583&height=583" alt="Script" class="game-image">
+            <button class="play-button" onclick="window.location.href='https://pastefy.app/gYopAiCU/raw'">Xem</button>
         </div>
     </div>
-    <script>
-        function openDevice1() {
-            window.location.href = 'https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUFxIdDhcIHlRKS09KTFQYExoIHgkIVRMPFhc=';
-        }
-        function openDevice2() {
-            window.location.href = 'https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUHBoXGgMCVgsXGgJWDx4YExUUFxQcAlYXEhYSDx4fVEpLTkpJVA8THlYMGhcQEhUcVh8eGh9WCA4JDRINFAkIVRMPFhc=';
-        }
-    </script>
 </body>
 </html>
