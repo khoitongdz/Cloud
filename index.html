@@ -1,180 +1,1045 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📱𝐔𝐠𝐩𝐡𝐨𝐧𝐞𝐦𝐨𝐝-𝐤𝐡𝐨𝐢𝐭𝐨𝐧𝐠𝐝𝐳📱</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Key Loading</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            background-image: url('background.jpg'); 
-            background-size: cover; 
-            background-position: center;
-            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #121212; /* Nền tối */
+            color: white; /* Chữ trắng */
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
-            color: white; 
-        }
-        
-    }
-        .dark-mode-toggle {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5); 
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-        }
-        .dark-mode-toggle:hover {
-            background: rgba(0, 0, 0, 0.3);
-        }
-        .container {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            overflow-x: auto;
-            white-space: nowrap;
-            scroll-behavior: smooth;
-            max-width: 90vw;
-       
-        }
-        .time-display {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            font-size: 16px;        
-        }
-        .game-box {
-            display: flex;
+            height: 100vh;
             flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            min-width: 150px;
-            transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-        }
-        .game-box:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
-        }
-        .game-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-        .game-box:hover .game-image {
-            transform: scale(1.2);
-        }
-        .play-button {
-            position: relative;
-            background: linear-gradient(45deg, blue, cyan);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
             overflow: hidden;
         }
-        .play-button::after {
-            content: "";
-            position: absolute;
+
+        .container {
+            text-align: center;
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #ff4081; /* Màu chữ đậm */
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 64, 129, 0.8);
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+
+        .progress-container {
             width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.3);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            border-radius: 50%;
-            transition: transform 0.3s;
+            background: #555;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
         }
-        .play-button:hover {
-            background: linear-gradient(45deg, darkblue, lightblue);
+
+        .progress-bar {
+            height: 1.5rem;
+            width: 0;
+            background: linear-gradient(90deg, rgba(255, 64, 129, 0.8), rgba(0, 233, 255, 0.8)); /* Màu gradient */
+            transition: width 0.1s ease;
         }
-        .play-button:active::after {
-            transform: translate(-50%, -50%) scale(1.5);
+
+        .percentage {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+            color: #888;
         }
-        .light-mode body {
-            background: white;
-            color: black;
+
+        .key-display {
+            font-size: 1.5rem;
+            padding: 1rem;
+            background: #333;
+            border: 2px solid #ff4081; /* Viền hồng */
+            border-radius: 5px;
+            color: #fff;
+            display: none;
+            animation: fadeIn 1s ease-out;
+            margin-top: 1.5rem;
         }
-        .light-mode .game-box {
-            background: rgba(0, 0, 0, 0.1);
-        }
-        .light-mode .game-box:hover {
-            background: rgba(0, 0, 0, 0.2);
-        }
-        .light-mode .play-button {
-            background: linear-gradient(45deg, red, orange);
-        }
-        .light-mode .play-button:hover {
-            background: linear-gradient(45deg, darkred, darkorange);
-        }
-        .light-mode .dark-mode-toggle {
-            background: black;
+
+        button {
+            padding: 0.8rem 1.8rem;
+            background-color: #ff4081;
             color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ nhẹ cho nút */
+            font-family: 'Courier New', monospace; /* Thay đổi font chữ cho nút */
+            position: relative;
+            z-index: 2; /* Đảm bảo chữ luôn nằm trên viền */
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e33771; /* Màu nền khi hover */
+            transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Bóng đổ đậm hơn khi hover */
+        }
+
+        button:active {
+            transform: scale(0.98); /* Hiệu ứng khi click vào nút */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ trở lại bình thường khi click */
+        }
+
+        .tooltip {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #4CAF50;
+            display: none;
+        }
+
+        .tooltip.visible {
+            display: block;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        /* Keyframes cho hiệu ứng mờ và hiện rõ */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
-    
-<div class="web-credit">
-    Code:khoitongdz | Server Discord: 
-    <a href="https://discord.gg/w26VGWmMPb" target="_blank" style="color: snow white; text-decoration: none;">Join</a>
-</div> 
-     <div class="container">
-        <div class="game-box">
-            <div class="game-title">Device 1</div>
-            <img src="https://play-lh.googleusercontent.com/3EEJLviqFWAuHJWpmILUotvTfaFtV34KaEDoZrYAhGziOGVaHNbRZ1z7xwG-VdcdxQs" alt="Device 1" class="game-image">
-            <button class="play-button" onclick="window.location.href='https://example.com/device1'">Play</button>
+    <div class="container">
+        <h1>Đang tạo key...</h1>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="game-box">
-            <div class="game-title">Device 2</div>
-            <img src="https://play-lh.googleusercontent.com/3EEJLviqFWAuHJWpmILUotvTfaFtV34KaEDoZrYAhGziOGVaHNbRZ1z7xwG-VdcdxQs" alt="Device 2" class="game-image">
-            <button class="play-button" onclick="window.location.href='https://example.com/device2'">Play</button>
-        </div>
-        <div class="game-box">
-            <div class="game-title">Script Blox Fruit & Executor</div>
-            <img src="https://media.discordapp.net/attachments/1321869620881129566/1353724109657473107/66713b1a-eaf2-4915-bf92-0abd1ddc2fd6.webp?ex=67ef3792&is=67ede612&hm=36e46dcd87b52b1fd2fdce6294a701d01bbb8bbb6d97dee180a6f6c01006aab2&=&format=webp&width=509&height=509" alt="Script" class="game-image">
-            <button class="play-button" onclick="window.location.href='https://khoitongdz.github.io/Executor.xyz/'">Xem</button>
-       </div>
-    <div class="time-display" id="timeDisplay">Loading...</div>
-    
-<script>
-        function updateTime() {
-            const now = new Date();
-            const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
-            const dayName = days[now.getDay()];
-            const date = now.getDate().toString().padStart(2, '0');
-            const month = (now.getMonth() + 1).toString().padStart(2, '0');
-            const year = now.getFullYear();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            document.getElementById("timeDisplay").textContent = `${dayName}, ${date}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+        <div class="percentage" id="percentage">0%</div>
+        <div class="key-display" id="keyDisplay">Key sẽ hiển thị ở đây</div>
+        <button onclick="copyKey()" id="copyButton" disabled>Sao chép Key</button>
+        <div class="tooltip" id="tooltip">Key đã được sao chép vào clipboard!</div>
+    </div>
+
+    <script>
+        function startLoading() {
+            const progressBar = document.getElementById("progressBar");
+            const percentage = document.getElementById("percentage");
+            const keyDisplay = document.getElementById("keyDisplay");
+            const button = document.getElementById("copyButton");
+            const heading = document.querySelector("h1");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = progress + "%";
+                percentage.textContent = progress + "%";
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    percentage.style.display = "none";
+                    heading.textContent = "Key đã được tạo!";
+                    keyDisplay.style.display = "block";
+                    keyDisplay.textContent = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+                    button.disabled = false; // Kích hoạt nút sao chép
+                }
+            }, 30); // 30ms mỗi lần tăng, 100 lần = 3 giây
         }
-        setInterval(updateTime, 1000);
-        updateTime();
+
+        function copyKey() {
+            const keyDisplay = document.getElementById('keyDisplay');
+            const tooltip = document.getElementById('tooltip');
+            const key = keyDisplay.textContent;
+
+            if (key !== 'Không tìm thấy key!') {
+                navigator.clipboard.writeText(key).then(() => {
+                    tooltip.classList.add("visible");
+                    setTimeout(() => {
+                        tooltip.classList.remove("visible");
+                    }, 2000);
+                });
+            }
+        }
+
+        // Bắt đầu loading ngay khi trang tải
+        startLoading();
     </script>
 </body>
 </html>
+
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #121212; /* Nền tối */
+            color: white; /* Chữ trắng */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #ff4081; /* Màu chữ đậm */
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 64, 129, 0.8);
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: #555;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 1.5rem;
+            width: 0;
+            background: linear-gradient(90deg, rgba(255, 64, 129, 0.8), rgba(0, 233, 255, 0.8)); /* Màu gradient */
+            transition: width 0.1s ease;
+        }
+
+        .percentage {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        .key-display {
+            font-size: 1.5rem;
+            padding: 1rem;
+            background: #333;
+            border: 2px solid #ff4081; /* Viền hồng */
+            border-radius: 5px;
+            color: #fff;
+            display: none;
+            animation: fadeIn 1s ease-out;
+            margin-top: 1.5rem;
+            word-wrap: break-word;
+        }
+
+        .show-more {
+            color: #ff4081;
+            cursor: pointer;
+            display: none;
+            margin-top: 0.5rem;
+        }
+
+        button {
+            padding: 0.8rem 1.8rem;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ nhẹ cho nút */
+            font-family: 'Courier New', monospace; /* Thay đổi font chữ cho nút */
+            position: relative;
+            z-index: 2; /* Đảm bảo chữ luôn nằm trên viền */
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e33771; /* Màu nền khi hover */
+            transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Bóng đổ đậm hơn khi hover */
+        }
+
+        button:active {
+            transform: scale(0.98); /* Hiệu ứng khi click vào nút */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ trở lại bình thường khi click */
+        }
+
+        .tooltip {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #4CAF50;
+            display: none;
+        }
+
+        .tooltip.visible {
+            display: block;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        /* Keyframes cho hiệu ứng mờ và hiện rõ */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Key Loading</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #121212; /* Nền tối */
+            color: white; /* Chữ trắng */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #ff4081; /* Màu chữ đậm */
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 64, 129, 0.8);
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: #555;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 1.5rem;
+            width: 0;
+            background: linear-gradient(90deg, rgba(255, 64, 129, 0.8), rgba(0, 233, 255, 0.8)); /* Màu gradient */
+            transition: width 0.1s ease;
+        }
+
+        .percentage {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        .key-display {
+            font-size: 1.5rem;
+            padding: 1rem;
+            background: #333;
+            border: 2px solid #ff4081; /* Viền hồng */
+            border-radius: 5px;
+            color: #fff;
+            display: none;
+            animation: fadeIn 1s ease-out;
+            margin-top: 1.5rem;
+            word-wrap: break-word;
+        }
+
+        .show-more {
+            color: #ff4081;
+            cursor: pointer;
+            display: none;
+            margin-top: 0.5rem;
+        }
+
+        button {
+            padding: 0.8rem 1.8rem;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ nhẹ cho nút */
+            font-family: 'Courier New', monospace; /* Thay đổi font chữ cho nút */
+            position: relative;
+            z-index: 2; /* Đảm bảo chữ luôn nằm trên viền */
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e33771; /* Màu nền khi hover */
+            transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Bóng đổ đậm hơn khi hover */
+        }
+
+        button:active {
+            transform: scale(0.98); /* Hiệu ứng khi click vào nút */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ trở lại bình thường khi click */
+        }
+
+        .tooltip {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #4CAF50;
+            display: none;
+        }
+
+        .tooltip.visible {
+            display: block;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        /* Keyframes cho hiệu ứng mờ và hiện rõ */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Key đã được tạo!</h1>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar" style="width: 100%;"></div>
+        </div>
+        <div class="percentage" id="percentage" style="display: none;">100%</div>
+        <div class="key-display" id="keyDisplay" style="display: block;">?ug daafafd10a0dcf7630e28f25a359a87f0b25e737958a06...</div>
+        <div class="show-more" id="showMore" onclick="toggleKey()" style="display: block;">Hiển thị thêm</div>
+        <button onclick="copyKey()" id="copyButton">Sao chép Key</button>
+        <div class="tooltip" id="tooltip">Key đã được sao chép vào clipboard!</div>
+    </div>
+
+    <script>
+        function startLoading() {
+            const progressBar = document.getElementById("progressBar");
+            const percentage = document.getElementById("percentage");
+            const keyDisplay = document.getElementById("keyDisplay");
+            const button = document.getElementById("copyButton");
+            const heading = document.querySelector("h1");
+            const showMore = document.getElementById("showMore");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = progress + "%";
+                percentage.textContent = progress + "%";
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    percentage.style.display = "none";
+                    heading.textContent = "Key đã được tạo!";
+                    keyDisplay.style.display = "block";
+                    const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+                    if (key.length > 50) {
+                        keyDisplay.textContent = key.substring(0, 50) + "...";
+                        showMore.style.display = "block";
+                    } else {
+                        keyDisplay.textContent = key;
+                    }
+                    button.disabled = false; // Kích hoạt nút sao chép
+                }
+            }, 30); // 30ms mỗi lần tăng, 100 lần = 3 giây
+        }
+
+        function toggleKey() {
+            const keyDisplay = document.getElementById("keyDisplay");
+            const showMore = document.getElementById("showMore");
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+            if (keyDisplay.textContent.endsWith("...")) {
+                keyDisplay.textContent = key;
+                showMore.textContent = "Ẩn bớt";
+            } else {
+                keyDisplay.textContent = key.substring(0, 50) + "...";
+                showMore.textContent = "Hiển thị thêm";
+            }
+        }
+
+        function copyKey() {
+            const keyDisplay = document.getElementById('keyDisplay');
+            const tooltip = document.getElementById('tooltip');
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+
+            if (key !== 'Không tìm thấy key!') {
+                navigator.clipboard.writeText(key).then(() => {
+                    tooltip.classList.add("visible");
+                    setTimeout(() => {
+                        tooltip.classList.remove("visible");
+                    }, 2000);
+                });
+            }
+        }
+
+        // Bắt đầu loading ngay khi trang tải
+        startLoading();
+    </script>
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;92c714addc30d13f&quot;,&quot;version&quot;:&quot;2025.3.0&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;79f2af5d82f649c9b7a933ec35b282a3&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}}}" crossorigin="anonymous"></script>
+
+</body><div class="container">
+        <h1>Key đã được tạo!</h1>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar" style="width: 100%;"></div>
+        </div>
+        <div class="percentage" id="percentage" style="display: none;">100%</div>
+        <div class="key-display" id="keyDisplay" style="display: block;">?ug daafafd10a0dcf7630e28f25a359a87f0b25e737958a06...</div>
+        <div class="show-more" id="showMore" onclick="toggleKey()" style="display: block;">Hiển thị thêm</div>
+        <button onclick="copyKey()" id="copyButton">Sao chép Key</button>
+        <div class="tooltip" id="tooltip">Key đã được sao chép vào clipboard!</div>
+    </div><div class="progress-container">
+            <div class="progress-bar" id="progressBar" style="width: 100%;"></div>
+        </div>
+        
+        function startLoading() {
+            const progressBar = document.getElementById("progressBar");
+            const percentage = document.getElementById("percentage");
+            const keyDisplay = document.getElementById("keyDisplay");
+            const button = document.getElementById("copyButton");
+            const heading = document.querySelector("h1");
+            const showMore = document.getElementById("showMore");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = progress + "%";
+                percentage.textContent = progress + "%";
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    percentage.style.display = "none";
+                    heading.textContent = "Key đã được tạo!";
+                    keyDisplay.style.display = "block";
+                    const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+                    if (key.length > 50) {
+                        keyDisplay.textContent = key.substring(0, 50) + "...";
+                        showMore.style.display = "block";
+                    } else {
+                        keyDisplay.textContent = key;
+                    }
+                    button.disabled = false; // Kích hoạt nút sao chép
+                }
+            }, 30); // 30ms mỗi lần tăng, 100 lần = 3 giây
+        }
+
+        function toggleKey() {
+            const keyDisplay = document.getElementById("keyDisplay");
+            const showMore = document.getElementById("showMore");
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+            if (keyDisplay.textContent.endsWith("...")) {
+                keyDisplay.textContent = key;
+                showMore.textContent = "Ẩn bớt";
+            } else {
+                keyDisplay.textContent = key.substring(0, 50) + "...";
+                showMore.textContent = "Hiển thị thêm";
+            }
+        }
+
+        function copyKey() {
+            const keyDisplay = document.getElementById('keyDisplay');
+            const tooltip = document.getElementById('tooltip');
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+
+            if (key !== 'Không tìm thấy key!') {
+                navigator.clipboard.writeText(key).then(() => {
+                    tooltip.classList.add("visible");
+                    setTimeout(() => {
+                        tooltip.classList.remove("visible");
+                    }, 2000);
+                });
+            }
+        }
+
+        // Bắt đầu loading ngay khi trang tải
+        startLoading();
+    <script>
+        function startLoading() {
+            const progressBar = document.getElementById("progressBar");
+            const percentage = document.getElementById("percentage");
+            const keyDisplay = document.getElementById("keyDisplay");
+            const button = document.getElementById("copyButton");
+            const heading = document.querySelector("h1");
+            const showMore = document.getElementById("showMore");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = progress + "%";
+                percentage.textContent = progress + "%";
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    percentage.style.display = "none";
+                    heading.textContent = "Key đã được tạo!";
+                    keyDisplay.style.display = "block";
+                    const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+                    if (key.length > 50) {
+                        keyDisplay.textContent = key.substring(0, 50) + "...";
+                        showMore.style.display = "block";
+                    } else {
+                        keyDisplay.textContent = key;
+                    }
+                    button.disabled = false; // Kích hoạt nút sao chép
+                }
+            }, 30); // 30ms mỗi lần tăng, 100 lần = 3 giây
+        }
+
+        function toggleKey() {
+            const keyDisplay = document.getElementById("keyDisplay");
+            const showMore = document.getElementById("showMore");
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+            if (keyDisplay.textContent.endsWith("...")) {
+                keyDisplay.textContent = key;
+                showMore.textContent = "Ẩn bớt";
+            } else {
+                keyDisplay.textContent = key.substring(0, 50) + "...";
+                showMore.textContent = "Hiển thị thêm";
+            }
+        }
+
+        function copyKey() {
+            const keyDisplay = document.getElementById('keyDisplay');
+            const tooltip = document.getElementById('tooltip');
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+
+            if (key !== 'Không tìm thấy key!') {
+                navigator.clipboard.writeText(key).then(() => {
+                    tooltip.classList.add("visible");
+                    setTimeout(() => {
+                        tooltip.classList.remove("visible");
+                    }, 2000);
+                });
+            }
+        }
+
+        // Bắt đầu loading ngay khi trang tải
+        startLoading();
+    </script><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;92c714addc30d13f&quot;,&quot;version&quot;:&quot;2025.3.0&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;79f2af5d82f649c9b7a933ec35b282a3&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}}}" crossorigin="anonymous"></script>
+    <body>
+    <div class="container">
+        <h1>Key đã được tạo!</h1>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar" style="width: 100%;"></div>
+        </div>
+        <div class="percentage" id="percentage" style="display: none;">100%</div>
+        <div class="key-display" id="keyDisplay" style="display: block;">?ug daafafd10a0dcf7630e28f25a359a87f0b25e737958a06...</div>
+        <div class="show-more" id="showMore" onclick="toggleKey()" style="display: block;">Hiển thị thêm</div>
+        <button onclick="copyKey()" id="copyButton">Sao chép Key</button>
+        <div class="tooltip" id="tooltip">Key đã được sao chép vào clipboard!</div>
+    </div>
+
+    <script>
+        function startLoading() {
+            const progressBar = document.getElementById("progressBar");
+            const percentage = document.getElementById("percentage");
+            const keyDisplay = document.getElementById("keyDisplay");
+            const button = document.getElementById("copyButton");
+            const heading = document.querySelector("h1");
+            const showMore = document.getElementById("showMore");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = progress + "%";
+                percentage.textContent = progress + "%";
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    percentage.style.display = "none";
+                    heading.textContent = "Key đã được tạo!";
+                    keyDisplay.style.display = "block";
+                    const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+                    if (key.length > 50) {
+                        keyDisplay.textContent = key.substring(0, 50) + "...";
+                        showMore.style.display = "block";
+                    } else {
+                        keyDisplay.textContent = key;
+                    }
+                    button.disabled = false; // Kích hoạt nút sao chép
+                }
+            }, 30); // 30ms mỗi lần tăng, 100 lần = 3 giây
+        }
+
+        function toggleKey() {
+            const keyDisplay = document.getElementById("keyDisplay");
+            const showMore = document.getElementById("showMore");
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+            if (keyDisplay.textContent.endsWith("...")) {
+                keyDisplay.textContent = key;
+                showMore.textContent = "Ẩn bớt";
+            } else {
+                keyDisplay.textContent = key.substring(0, 50) + "...";
+                showMore.textContent = "Hiển thị thêm";
+            }
+        }
+
+        function copyKey() {
+            const keyDisplay = document.getElementById('keyDisplay');
+            const tooltip = document.getElementById('tooltip');
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+
+            if (key !== 'Không tìm thấy key!') {
+                navigator.clipboard.writeText(key).then(() => {
+                    tooltip.classList.add("visible");
+                    setTimeout(() => {
+                        tooltip.classList.remove("visible");
+                    }, 2000);
+                });
+            }
+        }
+
+        // Bắt đầu loading ngay khi trang tải
+        startLoading();
+    </script>
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;92c714addc30d13f&quot;,&quot;version&quot;:&quot;2025.3.0&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;79f2af5d82f649c9b7a933ec35b282a3&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}}}" crossorigin="anonymous"></script>
+
+</body>
+<html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Key Loading</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #121212; /* Nền tối */
+            color: white; /* Chữ trắng */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #ff4081; /* Màu chữ đậm */
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 64, 129, 0.8);
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: #555;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 1.5rem;
+            width: 0;
+            background: linear-gradient(90deg, rgba(255, 64, 129, 0.8), rgba(0, 233, 255, 0.8)); /* Màu gradient */
+            transition: width 0.1s ease;
+        }
+
+        .percentage {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        .key-display {
+            font-size: 1.5rem;
+            padding: 1rem;
+            background: #333;
+            border: 2px solid #ff4081; /* Viền hồng */
+            border-radius: 5px;
+            color: #fff;
+            display: none;
+            animation: fadeIn 1s ease-out;
+            margin-top: 1.5rem;
+            word-wrap: break-word;
+        }
+
+        .show-more {
+            color: #ff4081;
+            cursor: pointer;
+            display: none;
+            margin-top: 0.5rem;
+        }
+
+        button {
+            padding: 0.8rem 1.8rem;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ nhẹ cho nút */
+            font-family: 'Courier New', monospace; /* Thay đổi font chữ cho nút */
+            position: relative;
+            z-index: 2; /* Đảm bảo chữ luôn nằm trên viền */
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e33771; /* Màu nền khi hover */
+            transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Bóng đổ đậm hơn khi hover */
+        }
+
+        button:active {
+            transform: scale(0.98); /* Hiệu ứng khi click vào nút */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ trở lại bình thường khi click */
+        }
+
+        .tooltip {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #4CAF50;
+            display: none;
+        }
+
+        .tooltip.visible {
+            display: block;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        /* Keyframes cho hiệu ứng mờ và hiện rõ */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Key đã được tạo!</h1>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar" style="width: 100%;"></div>
+        </div>
+        <div class="percentage" id="percentage" style="display: none;">100%</div>
+        <div class="key-display" id="keyDisplay" style="display: block;">?ug daafafd10a0dcf7630e28f25a359a87f0b25e737958a06...</div>
+        <div class="show-more" id="showMore" onclick="toggleKey()" style="display: block;">Hiển thị thêm</div>
+        <button onclick="copyKey()" id="copyButton">Sao chép Key</button>
+        <div class="tooltip" id="tooltip">Key đã được sao chép vào clipboard!</div>
+    </div>
+
+    <script>
+        function startLoading() {
+            const progressBar = document.getElementById("progressBar");
+            const percentage = document.getElementById("percentage");
+            const keyDisplay = document.getElementById("keyDisplay");
+            const button = document.getElementById("copyButton");
+            const heading = document.querySelector("h1");
+            const showMore = document.getElementById("showMore");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = progress + "%";
+                percentage.textContent = progress + "%";
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    percentage.style.display = "none";
+                    heading.textContent = "Key đã được tạo!";
+                    keyDisplay.style.display = "block";
+                    const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+                    if (key.length > 50) {
+                        keyDisplay.textContent = key.substring(0, 50) + "...";
+                        showMore.style.display = "block";
+                    } else {
+                        keyDisplay.textContent = key;
+                    }
+                    button.disabled = false; // Kích hoạt nút sao chép
+                }
+            }, 30); // 30ms mỗi lần tăng, 100 lần = 3 giây
+        }
+
+        function toggleKey() {
+            const keyDisplay = document.getElementById("keyDisplay");
+            const showMore = document.getElementById("showMore");
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+            if (keyDisplay.textContent.endsWith("...")) {
+                keyDisplay.textContent = key;
+                showMore.textContent = "Ẩn bớt";
+            } else {
+                keyDisplay.textContent = key.substring(0, 50) + "...";
+                showMore.textContent = "Hiển thị thêm";
+            }
+        }
+
+        function copyKey() {
+            const keyDisplay = document.getElementById('keyDisplay');
+            const tooltip = document.getElementById('tooltip');
+            const key = new URLSearchParams(window.location.search).get('key') || "Không tìm thấy key!";
+
+            if (key !== 'Không tìm thấy key!') {
+                navigator.clipboard.writeText(key).then(() => {
+                    tooltip.classList.add("visible");
+                    setTimeout(() => {
+                        tooltip.classList.remove("visible");
+                    }, 2000);
+                });
+            }
+        }
+
+        // Bắt đầu loading ngay khi trang tải
+        startLoading();
+    </script>
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;92c714addc30d13f&quot;,&quot;version&quot;:&quot;2025.3.0&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;79f2af5d82f649c9b7a933ec35b282a3&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}}}" crossorigin="anonymous"></script>
+
+</body></html>
