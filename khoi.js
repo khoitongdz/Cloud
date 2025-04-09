@@ -13,5 +13,5 @@
 // @downloadURL  https://raw.githubusercontent.com/hieugamingmc747/BypassYeumoney/main/BypassYeumoney.user.js
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @icon         https://tr.rbxcdn.com/180DAY-433e973b5fbc1e8d5cdebd0c6be03472/420/420/Decal/Webp/noFilter
+// @icon         https://media.discordapp.net/attachments/1352925168288137216/1354343403713986711/image.png?ex=67f6be55&is=67f56cd5&hm=be27d666ac8dd2cbe95b1a23c4908bd557aa58e1e54135c230a1790a5278cb99&=&format=webp&quality=lossless&width=477&height=481
 // ==/UserScript==
