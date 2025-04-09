@@ -8,8 +8,8 @@
 // @match        *://docs.google.com/spreadsheets/*
 // @match        *://docs.google.com/forms/*
 // @grant        GM_xmlhttpRequest
-// @require      https://raw.githubusercontent.com/Hieugamingmc747/BypassYeumoney/refs/heads/main/BypassYeumoney.js
-// @updateURL    https://raw.githubusercontent.com/hieugamingmc747/BypassYeumoney/main/BypassYeumoneyUpdate.user.js
+// @require      https://raw.githubusercontent.com/khoitongdz/past/refs/heads/main/yeumonney.js
+// @updateURL    https://raw.githubusercontent.com/khoitongdz/past/refs/heads/main/khoi.js
 // @downloadURL  https://raw.githubusercontent.com/hieugamingmc747/BypassYeumoney/main/BypassYeumoney.user.js
 // @grant        GM_getValue
 // @grant        GM_setValue
