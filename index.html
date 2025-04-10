@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff"> <!-- Đổi màu thanh trạng thái thành trắng -->
-  <title>Turbo Lite - Get Key</title>
+  <title>test - Get Key</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -82,8 +82,8 @@
 
 <div class="key-container" id="keyContainer">
   <div class="key-box">
-    <h2>Turbo Lite</h2>
-    <h3>Bạn Cần Lấy Key Để Chơiii</h3>
+    <h2>khoitongdz</h2>
+    <h3>Key là: khoitongdz</h3>
     <h4>1 Key + 30h = Vô Hạn Chơi</h4>
     <input type="text" id="userKey" placeholder="Dán Key Vào Đây">
     <br>
@@ -126,7 +126,7 @@ function checkKey() {
     setTimeout(() => {
       if (validKeys.includes(userKey)) {
         message.style.color = "green";
-        message.textContent = "Ok Ok Key Đúng";
+        message.textContent = "Ok Key Đúng";
         localStorage.setItem("storedKey", userKey);
         localStorage.setItem("keyTimestamp", Date.now().toString());
 
@@ -156,8 +156,8 @@ function checkStoredKey() {
     }
 }
 
-async function sendWebhook(usedKey = "Welcome Back!") {
-    const webhookURL = "https://discord.com/api/webhooks/1323294725855379537/uGswNcwsoQKTKHDsCEGpUmxrC7M1ZdydmKj787-nMQ2w_lcW5KHwo-hellQIIFlFj7rH";
+async function sendWebhook(usedKey = "Người dùng!") {
+    const webhookURL = "https://discord.com/api/webhooks/1345755246042812438/alTdo3812sDUJqTu2jJQgqyfwqjFBgJ5y9Xr8gPrxTiZubhX0Y7vWqJFDXESg5jrnWvO";
 
     // Lấy thông tin thiết bị
     const userAgent = navigator.userAgent;
