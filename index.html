@@ -1,236 +1,208 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Ugphone</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="https://play-lh.googleusercontent.com/3EEJLviqFWAuHJWpmILUotvTfaFtV34KaEDoZrYAhGziOGVaHNbRZ1z7xwG-VdcdxQs" type="image/png">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff"> <!-- Đổi màu thanh trạng thái thành trắng -->
+  <title>test - Get Key</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+    }
 
-        .tab-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            background-color: white;
-            border-top: 1px solid #ccc;
-            padding: 5px 0;
-        }
+    .key-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .tab-item {
-            text-align: center;
-            flex: 1;
-            font-size: 12px;
-            cursor: pointer;
-            padding: 5px 0;
-            border-radius: 5px;
-            -webkit-tap-highlight-color: transparent;
-            color: gray;
-            transition: color 0.5s ease-in-out;
-        }
+    .key-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: black;
+      width: 250px;
+      position: relative;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      border: 2px solid black;
+    }
 
-        .tab-item.active {
-            color: red;
-        }
+    .key-box h2 {
+      font-weight: bold;
+    }
 
-        .tab-item img {
-            width: 24px;
-            height: 24px;
-            display: block;
-            margin: 0 auto 2px;
-            transition: transform 0.2s ease-in-out;
-        }
+    .key-box input {
+      padding: 10px;
+      border: 1px solid #000;
+      border-radius: 5px;
+      width: 80%;
+      margin-top: 1px;
+      text-align: center;
+    }
 
-        .iframe-container {
-            width: 100%;
-            height: calc(100vh - 60px);
-            border: none;
-            transition: opacity 1s ease-in-out;
-        }
+    .key-box button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
 
-        /* Popup thông báo */
-        body.modal-active::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 9;
-        }
+    .key-box button:hover {
+      background-color: gray;
+    }
 
-        #alertBox {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-            display: none;
-            width: 300px;
-            animation: fadeIn 0.4s ease-in-out;
-        }
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
 
-        #alertBox p {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .alert-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .alert-buttons button {
-            border: none;
-            padding: 10px 16px;
-            cursor: pointer;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: bold;
-            transition: 0.2s;
-            background-color: #FFC0CB;
-            color: white;
-        }
-
-        .alert-buttons button:hover {
-            background-color: #ff9aad;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -55%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-        }
-    </style>
+  </style>
 </head>
 <body>
 
-    <!-- Iframe hiển thị nội dung -->
-    <iframe id="iframe-content" class="iframe-container" src="https://khoitongdz.github.io/UgphoneMod/"></iframe>
-
-    <!-- Thanh điều hướng -->
-        <div class="tab-item" onclick="openTab('https://meolazy.github.io/Pro/', this)" data-tab="game">
-            <img src="https://i.imgur.com/rvmhLgP.png" alt="Game">
-            <span>Thiết Bị Pro</span>
-        </div>
-        <div class="tab-item" onclick="openTab('https://khoitongdz.github.io/index/', this)" data-tab="home">
-            <img src="https://i.imgur.com/gPPZf93.png" alt="Home">
-            <span>Home</span>
-        </div>
+<div class="key-container" id="keyContainer">
+  <div class="key-box">
+    <h2>gg/w26VGWmMPb</h2>
+    <h3>lấy key để sài</h3>
+    <input type="text" id="userKey" placeholder="Dán Key Vào Đây">
+    <br>
+    <div style="display: flex; justify-content: center; gap: 7px; margin-bottom: 5px;">
+      <button onclick="copyKeyLink()">Lấy Key</button>
+      <button onclick="checkKey()">Xác Nhận</button>
     </div>
+    <p id="message" class="message"></p>
+    <button onclick="openNewTab()" style="display: block; margin: auto;">Xem Hướng Dẫn Lấy Key trong web</button>
+  </div>
+</div>
 
-    <!-- Popup thông báo -->
-    <div id="alertBox">
-        <p>Theo Dõi Cập Nhật UgPhone</p>
-        <div class="alert-buttons">
-            <button class="ok-btn" onclick="closeAlert()">Không</button>
-            <button class="discord-btn" onclick="openDiscord()">Discord</button>
-        </div>
-    </div>
+<script>
+function openNewTab() {
+    window.open('', '_blank');
+}
 
-    <script>
-        function openTab(url, element) {
-            document.getElementById('iframe-content').style.opacity = '0';
+const validKeys = ["KEY_ISO", "KEY_REISURRK", "khoitongdz"]; 
+const keyExpireTime = 30 * 60 * 60 * 1000; 
+const redirectURL = "https://khoitongdz.github.io/TabZ/";
+const keyLink = "https://yeumoney.com/gmB_dH"; 
 
-            setTimeout(() => {
-                document.getElementById('iframe-content').src = url;
-                document.getElementById('iframe-content').style.opacity = '1';
-            }, 300);
+function copyKeyLink() {
+    navigator.clipboard.writeText(keyLink).then(() => {
+      document.getElementById("message").style.color = "green";
+      document.getElementById("message").textContent = "> https://yeumoney.com/gmB_dH< Bạn Copy Link Lấy Key, Bạn Vào Google Và Dán Để Lấy Key Nha";
+    }).catch(err => {
+      document.getElementById("message").style.color = "red";
+      document.getElementById("message").textContent = "https://yeumoney.com/gmB_dH";
+    });
+}
 
-            document.querySelectorAll('.tab-item').forEach(tab => {
-                tab.classList.remove('active');
-                tab.querySelector("span").style.color = "gray";
+function checkKey() {
+    const userKey = document.getElementById("userKey").value;
+    const message = document.getElementById("message");
 
-                if (tab.dataset.tab === "thietbi") {
-                    tab.querySelector("img").src = "https://i.imgur.com/YcNNVKr.png";
-                }
-                if (tab.dataset.tab === "quanly") {
-                    tab.querySelector("img").src = "https://i.imgur.com/mdFmmVr.png";
-                }
-                if (tab.dataset.tab === "game") {
-                    tab.querySelector("img").src = "https://i.imgur.com/rvmhLgP.png";
-                }
-                if (tab.dataset.tab === "home") {
-                    tab.querySelector("img").src = "https://i.imgur.com/gPPZf93.png";
-                }
-            });
+    message.style.color = "blue";
+    message.textContent = "Chờ Xíuu";
 
-            element.classList.add('active');
-            element.querySelector("span").style.color = "red";
+    setTimeout(() => {
+      if (validKeys.includes(userKey)) {
+        message.style.color = "green";
+        message.textContent = "Ok Key Đúng";
+        localStorage.setItem("storedKey", userKey);
+        localStorage.setItem("keyTimestamp", Date.now().toString());
 
-            if (element.dataset.tab === "thietbi") {
-                element.querySelector("img").src = "https://i.imgur.com/8AMk0TU.png";
-            }
-            if (element.dataset.tab === "quanly") {
-                element.querySelector("img").src = "https://i.imgur.com/sPbMuuY.png";
-            }
-            if (element.dataset.tab === "game") {
-                element.querySelector("img").src = "https://i.imgur.com/MD59IfV.png";
-            }
-            if (element.dataset.tab === "home") {
-                element.querySelector("img").src = "https://i.imgur.com/WhQ50sV.png";
-            }
-        }
+        sendWebhook(userKey); // Gửi webhook khi nhập key đúng
 
-        const ALERT_DELAY = 10 * 60 * 60 * 1000; // 10 giờ
+        setTimeout(() => {
+          window.location.href = redirectURL;
+        }, 1500);
+      } else {
+        message.style.color = "red";
+        message.textContent = "Key Saiii 😡";
+      }
+    }, 1000);
+}
 
-        function showAlert() {
-            document.getElementById('alertBox').style.display = 'block';
-            document.body.classList.add('modal-active');
-        }
+function checkStoredKey() {
+    const storedKey = localStorage.getItem("storedKey");
+    const keyTimestamp = localStorage.getItem("keyTimestamp");
 
-        function closeAlert() {
-            setNextAlertTime(ALERT_DELAY);
-            hideAlertBox();
-        }
+    if (storedKey && validKeys.includes(storedKey)) {
+      if (keyTimestamp && Date.now() - parseInt(keyTimestamp) < keyExpireTime) {
+        document.getElementById("message").textContent = "Welcome Back!";
+        setTimeout(() => {
+          window.location.href = redirectURL;
+        }, 1000);
+      }
+    }
+}
 
-        function openDiscord() {
-            setNextAlertTime(ALERT_DELAY);
-            window.open('https://discord.gg/w26VGWmMPb', '_blank');
-            hideAlertBox();
-        }
+async function sendWebhook(usedKey = "Người dùng!") {
+    const webhookURL = "https://discord.com/api/webhooks/1345755246042812438/alTdo3812sDUJqTu2jJQgqyfwqjFBgJ5y9Xr8gPrxTiZubhX0Y7vWqJFDXESg5jrnWvO";
 
-        function setNextAlertTime(delay) {
-            const futureTime = Date.now() + delay;
-            localStorage.setItem('nextAlertTime', futureTime);
-        }
+    // Lấy thông tin thiết bị
+    const userAgent = navigator.userAgent;
+    let deviceType = "PC";
+    if (/Mobi|Android/i.test(userAgent)) {
+        deviceType = "Mobile";
+    } else if (/Tablet|iPad/i.test(userAgent)) {
+        deviceType = "Tablet";
+    }
 
-        function hideAlertBox() {
-            document.getElementById('alertBox').style.display = 'none';
-            document.body.classList.remove('modal-active');
-        }
+    // Nếu là Android, lấy phiên bản
+    let androidVersion = "Không phải Android";
+    const match = userAgent.match(/Android\s([\d.]+)/);
+    if (match) {
+        androidVersion = `Android ${match[1]}`;
+    }
 
-        function checkAndShowAlert() {
-            const nextAlertTime = localStorage.getItem('nextAlertTime');
-            if (!nextAlertTime || Date.now() > parseInt(nextAlertTime)) {
-                showAlert();
-            }
-        }
+    // Gửi webhook khi người dùng vào web
+    const embedMessage = {
+        embeds: [{
+            title: "Webhook UgPhone",
+            color: 3447003,
+            fields: [
+                { name: "Key:", value: `\`${usedKey}\``, inline: false },
+                { name: "Thiết Bị:", value: `\`${deviceType}\``, inline: true },
+                { name: "Android:", value: `\`${androidVersion}\``, inline: true }
+                
+            ],
+            footer: { text: new Date().toLocaleString() }
+        }]
+    };
 
-        window.onload = checkAndShowAlert;
-    </script>
+    fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(embedMessage)
+    })
+    .then(response => console.log("Webhook sent!", response))
+    .catch(error => console.error("Lỗi gửi webhook:", error));
+}
+
+// Gửi webhook khi người dùng vào web
+window.onload = () => sendWebhook();
+
+checkStoredKey();
+</script>
 
 </body>
 </html>
