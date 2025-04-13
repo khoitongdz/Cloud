@@ -1,117 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff"> <!-- Đổi màu thanh trạng thái thành trắng -->
-  <title>khoitongdz - Get Key</title>
+  <title>Key Verification</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      text-align: center;
-      flex-direction: column;
+      margin: 0;
+      overflow: hidden;
     }
-
     .key-container {
-      position: fixed;
-      top: 0;
-      left: 0;
+      background: #111;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      width: 350px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+    .key-container:hover {
+      transform: scale(1.05);
+    }
+    h3 {
+      color: #f1f1f1;
+      font-size: 24px;
+      margin-bottom: 25px;
+    }
+    input[type="text"] {
       width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .key-box {
-      background: white;
-      padding: 20px;
+      padding: 15px;
+      margin: 15px 0;
       border-radius: 10px;
-      text-align: center;
-      color: black;
-      width: 250px;
-      position: relative;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      border: 2px solid black;
-    }
-
-    .key-box h2 {
-      font-weight: bold;
-    }
-
-    .key-box input {
-      padding: 10px;
-      border: 1px solid #000;
-      border-radius: 5px;
-      width: 80%;
-      margin-top: 1px;
-      text-align: center;
-    }
-
-    .key-box button {
-      padding: 10px 15px;
       border: none;
-      border-radius: 5px;
-      background-color: black;
+      background-color: #333;
       color: white;
-      font-weight: bold;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+      transition: background-color 0.3s;
+    }
+    input[type="text"]:focus {
+      background-color: #444;
+    }
+    button {
+      padding: 15px 25px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
+      background: #000;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+    .message {
+      margin: 15px 0;
+      min-height: 20px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    #countdown {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
       margin-top: 20px;
     }
-
-    .key-box button:hover {
-      background-color: gray;
+    .cta-buttons button {
+      width: 48%;
+      background-color: #333;
+      color: white;
     }
-
-    .message {
-      margin-top: 15px;
-      font-weight: bold;
+    .cta-buttons button:hover {
+      background-color: #444;
     }
-
   </style>
 </head>
 <body>
 
 <div class="key-container" id="keyContainer">
   <div class="key-box">
-    <h3>lấy key để sài</h3>
-    <input type="text" id="userKey" placeholder="Dán Key Vào Đây">
+    <h3>Lấy Key Để Sử Dụng</h3>
+    <input type="text" id="userKey" placeholder="Nhập Key Tại Đây">
     <br>
-    <div style="display: flex; justify-content: center; gap: 7px; margin-bottom: 5px;">
+    <div class="cta-buttons">
       <button onclick="copyKeyLink()">Lấy Key</button>
       <button onclick="checkKey()">Xác Nhận</button>
     </div>
     <p id="message" class="message"></p>
-    <p id="countdown" style="text-align:center; color: orange; font-weight: bold;"></p>
-    <button onclick="openNewTab()" style="display: block; margin: auto;">Xem Hướng Dẫn Lấy Key trong web</button>
+    <p id="countdown"></p>
   </div>
 </div>
 
 <script>
 function openNewTab() {
-    window.open('', '_blank');
+    window.open('https://yeumoney.com/gmB_dH', '_blank');
 }
 
 const validKeys = ["khoitongdz"]; 
-const keyExpireTime = 35 * 24 * 60 * 60 * 1000; // 35 ngày
+const keyExpireTime = 35 * 24 * 60 * 60 * 1000; 
 const redirectURL = "https://khoitongdz.github.io/UgphoneMod/";
 const keyLink = "https://yeumoney.com/gmB_dH"; 
 
 function copyKeyLink() {
     navigator.clipboard.writeText(keyLink).then(() => {
       document.getElementById("message").style.color = "green";
-      document.getElementById("message").textContent = "> https://yeumoney.com/gmB_dH< Bạn Copy Link Lấy Key, Bạn Vào Google Và Dán Để Lấy Key Nha";
+      document.getElementById("message").textContent = "Key link đã được sao chép! Vui lòng vào Google và dán để lấy key.";
     }).catch(err => {
       document.getElementById("message").style.color = "red";
-      document.getElementById("message").textContent = "https://yeumoney.com/gmB_dH";
+      document.getElementById("message").textContent = "Lỗi khi sao chép link!";
     });
 }
 
@@ -120,24 +131,24 @@ function checkKey() {
     const message = document.getElementById("message");
 
     message.style.color = "blue";
-    message.textContent = "Chờ Xíuu";
+    message.textContent = "Đang kiểm tra...";
 
     setTimeout(() => {
       if (validKeys.includes(userKey)) {
         message.style.color = "green";
-        message.textContent = "Ok Key Đúng";
+        message.textContent = "✅ Key hợp lệ!";
         localStorage.setItem("storedKey", userKey);
         localStorage.setItem("keyTimestamp", Date.now().toString());
 
         sendWebhook(userKey);
-        updateCountdown(); // Bắt đầu đếm ngược sau khi nhập key
+        updateCountdown();
 
         setTimeout(() => {
           window.location.href = redirectURL;
         }, 1500);
       } else {
         message.style.color = "red";
-        message.textContent = "Key Saiii 😡";
+        message.textContent = "❌ Key sai!";
       }
     }, 1000);
 }
@@ -148,16 +159,19 @@ function checkStoredKey() {
 
     if (storedKey && validKeys.includes(storedKey)) {
       if (keyTimestamp && Date.now() - parseInt(keyTimestamp) < keyExpireTime) {
-        document.getElementById("message").textContent = "Welcome Back!";
-        updateCountdown(); // Hiển thị thời gian còn lại
+        document.getElementById("message").textContent = "🔓 Chào mừng trở lại!";
+        updateCountdown(); 
         setTimeout(() => {
           window.location.href = redirectURL;
         }, 1000);
+      } else {
+        localStorage.removeItem("storedKey");
+        localStorage.removeItem("keyTimestamp");
+        alert("⚠️ Key đã hết hạn sau 35 ngày. Vui lòng nhập lại key.");
       }
     }
 }
 
-// ⏳ Đếm ngược thời gian hết hạn
 function updateCountdown() {
     const keyTimestamp = localStorage.getItem("keyTimestamp");
     const countdown = document.getElementById("countdown");
@@ -169,20 +183,11 @@ function updateCountdown() {
             const timeLeft = expireAt - now;
 
             if (timeLeft <= 0) {
-                countdown.textContent = "❌ Key đã hết hạn. Vui lòng nhập lại.";
+                countdown.textContent = "❌ Key đã hết hạn.";
                 countdown.style.color = "red";
-
                 localStorage.removeItem("storedKey");
                 localStorage.removeItem("keyTimestamp");
-
-                document.getElementById("userKey").style.display = "block";
-                const buttons = document.querySelectorAll("button");
-                buttons.forEach(btn => {
-                    if (btn.textContent.includes("Xác Nhận")) {
-                        btn.style.display = "inline-block";
-                    }
-                });
-
+                alert("⚠️ Key đã hết hạn. Vui lòng lấy key mới.");
                 clearInterval(interval);
                 return;
             }
@@ -197,39 +202,22 @@ function updateCountdown() {
     }
 }
 
-window.onload = () => {
-  checkStoredKey();
-};
-
 async function sendWebhook(usedKey = "Người dùng!") {
     const webhookURL = "https://discord.com/api/webhooks/1345755246042812438/alTdo3812sDUJqTu2jJQgqyfwqjFBgJ5y9Xr8gPrxTiZubhX0Y7vWqJFDXESg5jrnWvO";
-
-    // Lấy thông tin thiết bị
     const userAgent = navigator.userAgent;
-    let deviceType = "PC";
-    if (/Mobi|Android/i.test(userAgent)) {
-        deviceType = "Mobile";
-    } else if (/Tablet|iPad/i.test(userAgent)) {
-        deviceType = "Tablet";
-    }
-
-    // Nếu là Android, lấy phiên bản
+    let deviceType = /Mobi|Android/i.test(userAgent) ? "Mobile" : /Tablet|iPad/i.test(userAgent) ? "Tablet" : "PC";
     let androidVersion = "Không phải Android";
     const match = userAgent.match(/Android\s([\d.]+)/);
-    if (match) {
-        androidVersion = `Android ${match[1]}`;
-    }
+    if (match) androidVersion = `Android ${match[1]}`;
 
-    // Gửi webhook khi người dùng vào web
     const embedMessage = {
         embeds: [{
-            title: "Webhook UgPhone",
+            title: "Webhook Cloudphone",
             color: 3447003,
             fields: [
                 { name: "Key:", value: `\`${usedKey}\``, inline: false },
                 { name: "Thiết Bị:", value: `\`${deviceType}\``, inline: true },
                 { name: "Android:", value: `\`${androidVersion}\``, inline: true }
-                
             ],
             footer: { text: new Date().toLocaleString() }
         }]
@@ -239,15 +227,14 @@ async function sendWebhook(usedKey = "Người dùng!") {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(embedMessage)
-    })
-    .then(response => console.log("Webhook sent!", response))
-    .catch(error => console.error("Lỗi gửi webhook:", error));
+    }).then(res => console.log("Webhook sent!"))
+      .catch(err => console.error("Lỗi gửi webhook:", err));
 }
 
-// Gửi webhook khi người dùng vào web
-window.onload = () => sendWebhook();
-
-checkStoredKey();
+window.onload = () => {
+  sendWebhook();
+  checkStoredKey();
+};
 </script>
 
 </body>
