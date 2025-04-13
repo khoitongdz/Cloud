@@ -90,6 +90,7 @@
       <button onclick="checkKey()">Xác Nhận</button>
     </div>
     <p id="message" class="message"></p>
+    <p id="countdown" style="text-align:center; color: orange; font-weight: bold;"></p>
     <button onclick="openNewTab()" style="display: block; margin: auto;">Xem Hướng Dẫn Lấy Key trong web</button>
   </div>
 </div>
@@ -99,8 +100,8 @@ function openNewTab() {
     window.open('', '_blank');
 }
 
-const validKeys = ["KEY_ISO", "KEY_REISURRK", "khoitongdz"]; 
-const keyExpireTime = 35 * 24 * 60 * 60 * 1000;
+const validKeys = ["khoitongdz"]; 
+const keyExpireTime = 35 * 24 * 60 * 60 * 1000; // 35 ngày
 const redirectURL = "https://khoitongdz.github.io/UgphoneMod/";
 const keyLink = "https://yeumoney.com/gmB_dH"; 
 
@@ -128,7 +129,8 @@ function checkKey() {
         localStorage.setItem("storedKey", userKey);
         localStorage.setItem("keyTimestamp", Date.now().toString());
 
-        sendWebhook(userKey); // Gửi webhook khi nhập key đúng
+        sendWebhook(userKey);
+        updateCountdown(); // Bắt đầu đếm ngược sau khi nhập key
 
         setTimeout(() => {
           window.location.href = redirectURL;
@@ -147,12 +149,57 @@ function checkStoredKey() {
     if (storedKey && validKeys.includes(storedKey)) {
       if (keyTimestamp && Date.now() - parseInt(keyTimestamp) < keyExpireTime) {
         document.getElementById("message").textContent = "Welcome Back!";
+        updateCountdown(); // Hiển thị thời gian còn lại
         setTimeout(() => {
           window.location.href = redirectURL;
         }, 1000);
       }
     }
 }
+
+// ⏳ Đếm ngược thời gian hết hạn
+function updateCountdown() {
+    const keyTimestamp = localStorage.getItem("keyTimestamp");
+    const countdown = document.getElementById("countdown");
+
+    if (keyTimestamp) {
+        const expireAt = parseInt(keyTimestamp) + keyExpireTime;
+        const interval = setInterval(() => {
+            const now = Date.now();
+            const timeLeft = expireAt - now;
+
+            if (timeLeft <= 0) {
+                countdown.textContent = "❌ Key đã hết hạn. Vui lòng nhập lại.";
+                countdown.style.color = "red";
+
+                localStorage.removeItem("storedKey");
+                localStorage.removeItem("keyTimestamp");
+
+                document.getElementById("userKey").style.display = "block";
+                const buttons = document.querySelectorAll("button");
+                buttons.forEach(btn => {
+                    if (btn.textContent.includes("Xác Nhận")) {
+                        btn.style.display = "inline-block";
+                    }
+                });
+
+                clearInterval(interval);
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            countdown.textContent = `⏳ Key hết hạn sau: ${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+        }, 1000);
+    }
+}
+
+window.onload = () => {
+  checkStoredKey();
+};
 
 async function sendWebhook(usedKey = "Người dùng!") {
     const webhookURL = "https://discord.com/api/webhooks/1345755246042812438/alTdo3812sDUJqTu2jJQgqyfwqjFBgJ5y9Xr8gPrxTiZubhX0Y7vWqJFDXESg5jrnWvO";
